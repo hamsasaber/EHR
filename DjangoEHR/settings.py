@@ -1,10 +1,10 @@
 
+from os import environ, getenv
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-from os import environ, getenv
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -15,7 +15,8 @@ SECRET_KEY = 'django-insecure-8$l%as9%1nmvmn7e1x*uxtt1o)zo!q(o(2d*%i5ka-o!$)h=e3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =[os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
+ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']
+                 ] if 'WEBSITE_HOSTNAME' in os.environ else []
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -34,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "patient.apps.PatientConfig",
     "patientrecords.apps.PatientrecordsConfig",
-    "article.apps.ArticleConfig" ,
+    "article.apps.ArticleConfig",
     'crispy_forms',
     'crispy_bootstrap4',
     "django_htmx",
@@ -89,12 +90,12 @@ WSGI_APPLICATION = 'DjangoEHR.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'lab3database',
-        'PASSWORD': 'Mypassword3',
+        'NAME': 'appdev',
+        'USER': 'hamsa',
+        'PASSWORD': 'Admin@12345',
         'HOST': 'ehrserver.postgres.database.azure.com',
         'PORT': '5432',
-        'OPTIONS':{'sslmode':'require'},
+        'OPTIONS': {'sslmode': 'require'},
     }
 }
 
@@ -145,9 +146,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = 'patient/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "patient/static/",
-      # Add your static files directory here
+    # Add your static files directory here
 ]
-STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"#add this line
+# add this line
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -155,14 +157,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-#login redirect
+# login redirect
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/home"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 MESSAGE_TAGS = {
-    messages.ERROR:'danger'
+    messages.ERROR: 'danger'
 }
 # settings.py
 
